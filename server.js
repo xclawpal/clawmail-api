@@ -13,7 +13,7 @@ const TOKEN = process.env.API_TOKEN || 'dev-token-clawmail';
 
 // In-memory storage
 const inboxes = new Map(); // id -> { address, messages[] }
-const DOMAINS = ['claw.dev', 'temp.mail', 'oneuse.io'];
+const DOMAINS = ['claw.dev', 'claw.mail', 'claw.pal'];
 
 // CORS for local dev
 app.use('*', cors({
