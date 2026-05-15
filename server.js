@@ -8,7 +8,7 @@ import { serve } from '@hono/node-server';
 import { cors } from 'hono/cors';
 
 const app = new Hono();
-const PORT = 8787;
+const PORT = process.env.PORT || 8787;
 const TOKEN = process.env.API_TOKEN || 'dev-token-clawmail';
 
 // In-memory storage
@@ -134,6 +134,6 @@ app.delete('/email/:id', (c) => {
 // Health
 app.get('/', (c) => c.json({ service: 'clawmail-api', ok: true }));
 
-serve({ fetch: app.fetch, port: PORT, hostname: '127.0.0.1' });
-console.log(`ClawMail API running at http://127.0.0.1:${PORT}`);
+serve({ fetch: app.fetch, port: PORT, hostname: '0.0.0.0' });
+console.log(`ClawMail API running on port ${PORT}`);
 console.log(`Token: ${TOKEN}`);
