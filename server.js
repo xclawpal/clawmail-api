@@ -82,7 +82,7 @@ app.post('/generate', async (c) => {
 
   inboxes.set(id, {
     address,
-    messages: seedMessages(address),
+    messages: [],
     createdAt: Date.now(),
   });
 
