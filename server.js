@@ -77,7 +77,7 @@ app.get('/domains', (c) => {
 // POST /generate
 app.post('/generate', async (c) => {
   const body = await c.req.json().catch(() => ({}));
-  const address = body.address || `${newId()}@${DOMAINS[0]}`;
+  const address = body.email || body.address || `${newId()}@${DOMAINS[0]}`;
   const id = address;
 
   inboxes.set(id, {
