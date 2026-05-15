@@ -17,10 +17,13 @@ const DOMAINS = ['claw.dev', 'temp.mail', 'oneuse.io'];
 
 // CORS for local dev
 app.use('*', cors({
-  origin: ['http://127.0.0.1:5180', 'http://localhost:5180'],
+  origin: ['http://127.0.0.1:5180', 'http://localhost:5180', 'https://clawmail-seven.vercel.app', 'https://clawmail.vercel.app'],
   allowHeaders: ['Authorization', 'Content-Type'],
   allowMethods: ['GET', 'POST', 'DELETE'],
 }));
+
+// Health check (public, no auth)
+app.get('/', (c) => c.json({ service: 'clawmail-api', ok: true }));
 
 // Auth middleware
 app.use('*', async (c, next) => {
@@ -130,9 +133,6 @@ app.delete('/email/:id', (c) => {
   const existed = inboxes.delete(id);
   return c.json({ ok: existed });
 });
-
-// Health
-app.get('/', (c) => c.json({ service: 'clawmail-api', ok: true }));
 
 serve({ fetch: app.fetch, port: PORT, hostname: '0.0.0.0' });
 console.log(`ClawMail API running on port ${PORT}`);
